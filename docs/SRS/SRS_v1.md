@@ -121,6 +121,34 @@ Sistema web de autenticación que servirá como punto de entrada para un sistema
 
 ---
 
+### RF-007: Cierre de Sesión Automático
+**Prioridad:** Media  
+**Descripción:** El sistema debe cerrar la sesión del usuario automáticamente después de un período de inactividad para proteger la seguridad de la cuenta.
+
+**Criterios de Aceptación:**
+- El sistema debe detectar inactividad del usuario (sin interacción por 15 minutos)
+- Mostrar una advertencia 2 minutos antes del cierre automático
+- Cerrar sesión automáticamente y redirigir al login
+- El usuario debe poder extender la sesión antes del cierre automático
+- Registrar el evento de cierre automático en logs (cuando esté implementado)
+
+**Flujo Normal:**
+1. Usuario permanece inactivo por 13 minutos
+2. Sistema muestra advertencia: "Tu sesión expirará en 2 minutos por inactividad"
+3. Usuario puede hacer clic en "Mantener sesión activa"
+4. Si no hay interacción, después de 15 minutos totales, cerrar sesión
+5. Redirigir al login con mensaje informativo
+
+**Flujo Alternativo:**
+- Si el usuario interactúa con el sistema antes de los 15 minutos, reiniciar el contador
+
+**Justificación:**
+- Mejora la seguridad evitando sesiones abiertas sin supervisión
+- Protege información sensible en caso de que el usuario olvide cerrar sesión
+- Cumple con mejores prácticas de seguridad para aplicaciones web
+
+---
+
 ## 4. Requisitos No Funcionales
 
 ### RNF-001: Usabilidad
